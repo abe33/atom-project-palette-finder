@@ -1,0 +1,17 @@
+{
+  "name": "project-palette-finder",
+  "main": "./lib/project-palette-finder",
+  "version": "0.0.0",
+  "description": "A short description of your package",
+  "activationEvents": ["project-palette-finder:toggle"],
+  "repository": "https://github.com/atom/project-palette-finder",
+  "license": "MIT",
+  "engines": {
+    "atom": ">0.50.0"
+  },
+  "dependencies": {
+    "emissary": "1.x",
+    "mixto": "1.x",
+    "prolix": "1.x"
+  }
+}
