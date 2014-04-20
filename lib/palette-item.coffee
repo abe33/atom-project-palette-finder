@@ -1,6 +1,9 @@
+Color = require 'pigments'
 
 module.exports =
 class PaletteItem
-  constructor: (state) ->
+  constructor: ({@filePath, @row, @lineRange, @colorString}) ->
+    @color = new Color @colorString
 
-  serialize: -> {}
+  serialize: ->
+    {@filePath, @row, @range, @colorString}

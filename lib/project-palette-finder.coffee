@@ -19,13 +19,16 @@ class ProjectPaletteFinder
     '**/*.styl'
   ]
 
-  activate: (state) ->
-    @palette = new Palette state
+  activate: ({palette}) ->
+    @palette = new Palette palette
     @scanProject()
 
   deactivate: ->
 
   serialize: ->
+    {
+      palette: @palette.serialize()
+    }
 
   scanProject: ->
     filePatterns = @constructor.filePatterns
@@ -35,11 +38,16 @@ class ProjectPaletteFinder
 
     promise.then =>
       for {filePath, matches} in results
-        console.log matches
         for {lineText, lineOffset, matchText, range} in matches
           res = Color.searchColorSync(lineText, matchText.length)
           if res?
-            @palette.addItem new PaletteItem
+            row = range[0][0]
+            @palette.addItem new PaletteItem {
+              filePath
+              row
+              lineRange: res.range
+              colorString: res.match
+            }
 
       @emit 'palette:ready', @palette
 
