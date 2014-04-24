@@ -9,9 +9,15 @@
     "atom": ">0.50.0"
   },
   "dependencies": {
+    "underscore-plus": "1.x",
     "emissary": "1.x",
     "mixto": "1.x",
     "prolix": "1.x",
-    "pigments": "1.x"
+    "pigments": "1.x",
+    "pathwatcher": "1.x"
+  },
+  "devDependencies": {
+    "wrench": "1.5.x",
+    "temp": "~0.6.0"
   }
 }

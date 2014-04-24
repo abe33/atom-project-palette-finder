@@ -19,4 +19,20 @@ class Palette
     if item in @items
       @items.splice @items.indexOf(item), 1
 
+  getItemByName: (name) ->
+    @items.filter((item) -> item.name is name)[0]
+
+  getItemsForPath: (filePath) ->
+    @items.filter (item) -> item.filePath is filePath
+
+  getItemsForPathInRange: (filePath, range) ->
+    [[mStartRow, mStartCol], [mEndRow, mEndCol]] = range
+    @getItemsForPath(filePath).filter (item) ->
+      [[startRow, startCol], [endRow, endCol]] = item.getRange()
+
+      startRow >= mStartRow and
+      startColumn >= mStartCol and
+      endRow <= mEndRow and
+      endCol <= mEndCol
+
   serialize: -> { items: @items.map (i) -> i.serialize() }

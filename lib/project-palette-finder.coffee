@@ -1,10 +1,14 @@
-{Emitter} = require 'emissary'
+_ = require 'underscore-plus'
+fs = require 'fs'
+path = require 'path'
 Color = require 'pigments'
+{Emitter} = require 'emissary'
 
 Palette = require './palette'
 PaletteItem = require './palette-item'
 
 class ProjectPaletteFinder
+  @Color: Color
   Emitter.includeInto(this)
 
   @patterns: [
@@ -15,6 +19,7 @@ class ProjectPaletteFinder
 
   @filePatterns: [
     '**/*.sass'
+    '**/*.scss'
     '**/*.less'
     '**/*.styl'
   ]
@@ -23,31 +28,46 @@ class ProjectPaletteFinder
     @palette = new Palette palette
     @scanProject()
 
+    atom.workspaceView.command 'palette:refresh', => @scanProject()
+
   deactivate: ->
 
   serialize: ->
     {
-      palette: @palette.serialize()
+      # palette: @palette.serialize()
     }
 
   scanProject: ->
     filePatterns = @constructor.filePatterns
     results = []
-    promise = atom.project.scan @getPatternsRegExp(), filePatterns, (m) ->
+    promise = atom.project.scan @getPatternsRegExp(), paths: filePatterns, (m) ->
       results.push m
 
     promise.then =>
       for {filePath, matches} in results
-        for {lineText, lineOffset, matchText, range} in matches
+        for {lineText, matchText, range} in matches
           res = Color.searchColorSync(lineText, matchText.length)
           if res?
             row = range[0][0]
             @palette.addItem new PaletteItem {
               filePath
               row
+              name: matchText.replace /[\s=:]/g, ''
               lineRange: res.range
               colorString: res.match
             }
+
+            items = @palette.items
+            .map (item) ->
+              _.escapeRegExp item.name
+            .sort (a,b) ->
+              b.length - a.length
+
+            paletteRegexp = '(' + items.join('|') + ')(?!-|\\s*[\\.:=])\\b'
+            Color.removeExpression('palette')
+
+            Color.addExpression 'palette', paletteRegexp, (color, expr) =>
+              color.rgba = @palette.getItemByName(expr).color.rgba
 
       @emit 'palette:ready', @palette
 
