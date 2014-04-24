@@ -3,7 +3,7 @@
   "main": "./lib/project-palette-finder",
   "version": "0.0.0",
   "description": "Finds and archive colors defined in a project's less/sass/stylus files",
-  "repository": "https://github.com/atom/project-palette-finder",
+  "repository": "https://github.com/abe33/atom-project-palette-finder",
   "license": "MIT",
   "engines": {
     "atom": ">0.50.0"
