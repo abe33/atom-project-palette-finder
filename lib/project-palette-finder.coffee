@@ -48,6 +48,11 @@ class ProjectPaletteFinder
         for {lineText, matchText, range} in matches
           res = Color.searchColorSync(lineText, matchText.length)
           if res?
+            spaceBefore = lineText[matchText.length...res.range[0]]
+            spaceEnd = lineText[res.range[1]..-1]
+            continue unless spaceBefore.match /^\s*$/
+            continue unless spaceEnd.match /^[\s;]*$/
+
             row = range[0][0]
             @palette.addItem new PaletteItem {
               filePath
