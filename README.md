@@ -15,7 +15,8 @@ To access the package you can use the following snippets:
 ProjectPaletteFinder =
 require atom.packages.activePackages['project-palette-finder'].path
 
-ProjectPaletteFinder = require atom.packages.getLoadedPackage('project-palette-finder').path
+ProjectPaletteFinder =
+require atom.packages.getLoadedPackage('project-palette-finder').path
 ```
 
 #### Retrieving The Palette
@@ -65,7 +66,7 @@ new Color('red')
 new Color('#f00')
 new Color('#ff0000')
 new Color('rgba(255,0,0,1)')
-new Color('saturate(desaturate(rgba(255,0,0,1), 50%), 60%)')
+new Color('saturate(desaturate(rgba(255,0,0,1), 50%), 50%)')
 new Color('vec4(1,0,0,1)')
 new Color('0xffff0000')
 ```
