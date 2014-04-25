@@ -24,6 +24,9 @@ class ProjectPaletteFinder
     '**/*.styl'
   ]
 
+  constructor: ->
+    @Color = Color
+    
   activate: ({palette}) ->
     @palette = new Palette palette
     @scanProject()
