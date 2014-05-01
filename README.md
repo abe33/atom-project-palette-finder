@@ -1,5 +1,7 @@
 # project-palette-finder package
 
+[![Build Status](https://travis-ci.org/abe33/atom-project-palette-finder.svg)](https://travis-ci.org/abe33/atom-project-palette-finder)
+
 Finds and exposes colors defined in a project's Less, Sass or Stylus files.
 
 In itself this packages doesn't offer any specific commands or UI except the `palette:refresh` command.
