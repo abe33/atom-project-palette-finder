@@ -1,11 +1,14 @@
 _ = require 'underscore-plus'
 fs = require 'fs'
+url = require 'url'
 path = require 'path'
 Color = require 'pigments'
+querystring = require 'querystring'
 {Emitter} = require 'emissary'
 
 Palette = require './palette'
 PaletteItem = require './palette-item'
+ProjectPaletteView = require './project-palette-view'
 
 class ProjectPaletteFinder
   @Color: Color
@@ -24,14 +27,27 @@ class ProjectPaletteFinder
     '**/*.styl'
   ]
 
+  @grammarForExtensions:
+    sass: 'sass'
+    scss: 'scss'
+    less: 'less'
+    styl: 'stylus'
+
   constructor: ->
     @Color = Color
 
   activate: ({palette}) ->
-    @palette = new Palette palette
     @scanProject()
 
     atom.workspaceView.command 'palette:refresh', => @scanProject()
+    atom.workspaceView.command 'palette:view', => @displayView()
+
+    atom.workspace.registerOpener (uriToOpen) ->
+      {protocol, host, pathname} = url.parse uriToOpen
+      pathname = querystring.unescape(pathname) if pathname
+
+      return unless protocol is 'palette:'
+      new ProjectPaletteView
 
   deactivate: ->
 
@@ -40,9 +56,24 @@ class ProjectPaletteFinder
       # palette: @palette.serialize()
     }
 
+  displayView: ->
+    @scanProject().then (palette) ->
+      uri = "palette://view"
+
+      pane = atom.workspace.paneContainer.paneForUri uri
+
+      pane ||= atom.workspaceView.getActivePane().model
+
+      atom.workspace.openUriInPane(uri, pane, {}).done (view) ->
+        if view instanceof ProjectPaletteView
+          view.setPalette palette
+
   scanProject: ->
+    @palette = new Palette
+
     filePatterns = @constructor.filePatterns
     results = []
+
     promise = atom.project.scan @getPatternsRegExp(), paths: filePatterns, (m) ->
       results.push m
 
@@ -58,9 +89,14 @@ class ProjectPaletteFinder
             continue unless spaceEnd.match /^[\s;]*$/
 
             row = range[0][0]
+            ext = filePath.split('.')[-1..][0]
+            language = @constructor.grammarForExtensions[ext]
             @palette.addItem new PaletteItem {
               filePath
               row
+              lineText
+              language
+              extension: ext
               name: matchText.replace /[\s=:]/g, ''
               lineRange: res.range
               colorString: res.match
@@ -79,6 +115,7 @@ class ProjectPaletteFinder
               color.rgba = @palette.getItemByName(expr).color.rgba
 
       @emit 'palette:ready', @palette
+      @palette
 
   getPatternsRegExp: ->
     new RegExp '(' + @constructor.patterns.join('|') + ')', 'gi'

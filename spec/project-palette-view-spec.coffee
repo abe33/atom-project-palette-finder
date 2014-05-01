@@ -8,7 +8,7 @@ ProjectPaletteFinder = require '../lib/project-palette-finder'
 
 waitsForPromise = (fn) -> window.waitsForPromise timeout: 30000, fn
 
-describe "ProjectPaletteFinder", ->
+describe 'ProjectPaletteView', ->
 
   beforeEach ->
     atom.project.setPath(path.join(__dirname, 'fixtures'))
@@ -17,22 +17,29 @@ describe "ProjectPaletteFinder", ->
     fixturesPath = atom.project.getPath()
     wrench.copyDirSyncRecursive(fixturesPath, tempPath, forceDelete: true)
     atom.project.setPath(tempPath)
+    readyCallback = null
 
     atom.workspaceView = new WorkspaceView
+    atom.workspaceView.attachToDom()
 
     waitsForPromise ->
       atom.packages.activatePackage('project-palette-finder')
 
-  it 'scans the project on activation', ->
-    readyCallback = jasmine.createSpy('readyCallback')
-    ProjectPaletteFinder.on 'palette:ready', readyCallback
+    runs ->
+      readyCallback = jasmine.createSpy('readyCallback')
+      ProjectPaletteFinder.on 'palette:ready', readyCallback
 
     waitsFor -> readyCallback.callCount is 1
 
-    runs ->
-      palette = readyCallback.argsForCall[0][0]
-      expect(palette).toBeDefined()
+  describe 'when palette:view command is triggered', ->
+    it 'should have created a pane with the palette ui', ->
+      paletteView = null
+      runs ->
+        atom.workspaceView.trigger "palette:view"
 
-      expect(palette.items.length).toEqual(12)
+      waitsFor ->
+        paletteView = atom.workspaceView.find('.palette')
+        paletteView.length > 0
 
-      expect(Color.colorExpressions.palette).toBeDefined()
+      runs ->
+        expect(paletteView.find('.color').length).toEqual(12)
