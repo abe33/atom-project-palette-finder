@@ -4,8 +4,13 @@
 
 Finds and exposes colors defined in a project's Less, Sass or Stylus files.
 
-In itself this packages doesn't offer any specific commands or UI except the `palette:refresh` command.
-It just scans the project directory for Less, Sass (scss & sass) and Stylus files and search for variables containing colors. It do so at startup and everytime you trigger the `palette:refresh` command.
+![Palette View](https://raw.github.com/abe33/atom-project-palette-finder/master/screenshot.jpg)
+
+In itself this packages only offer the to following commands:
+
+ * `palette:refresh` - It just scans the project directory for Less, Sass (scss & sass) and Stylus files and search for variables containing colors. It do so at startup and everytime you trigger the `palette:refresh` command.
+ * `palette:view` - It scans the project and display a view in the active pane that lists all the colors defined in the palette, with source and path to the definition.
+
 Theses colors are then stored in a `Palette` object that is exposed by the package.
 After a project scan the colors can be retrieved with their name (the name of variable that hold them).
 
