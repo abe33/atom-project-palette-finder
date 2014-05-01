@@ -26,7 +26,7 @@ class ProjectPaletteFinder
 
   constructor: ->
     @Color = Color
-    
+
   activate: ({palette}) ->
     @palette = new Palette palette
     @scanProject()
@@ -49,10 +49,11 @@ class ProjectPaletteFinder
     promise.then =>
       for {filePath, matches} in results
         for {lineText, matchText, range} in matches
-          res = Color.searchColorSync(lineText, matchText.length)
+          lineForMatch = lineText.replace(/\/\/.+$/, '')
+          res = Color.searchColorSync(lineForMatch, matchText.length)
           if res?
-            spaceBefore = lineText[matchText.length...res.range[0]]
-            spaceEnd = lineText[res.range[1]..-1]
+            spaceBefore = lineForMatch[matchText.length...res.range[0]]
+            spaceEnd = lineForMatch[res.range[1]..-1]
             continue unless spaceBefore.match /^\s*$/
             continue unless spaceEnd.match /^[\s;]*$/
 
