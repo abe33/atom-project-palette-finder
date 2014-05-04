@@ -4,7 +4,7 @@
 
 Finds and exposes colors defined in a project's Less, Sass or Stylus files.
 
-![Palette View](https://raw.github.com/abe33/atom-project-palette-finder/master/screenshot.png)
+![Palette View](https://raw.github.com/abe33/atom-project-palette-finder/master/screenshot.gif)
 
 In itself this packages only offer the to following commands:
 
