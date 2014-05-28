@@ -4,7 +4,7 @@ ProjectPaletteColorView = require './project-palette-color-view'
 module.exports =
 class CoffeeCompileView extends ScrollView
   @content: ->
-    @div class: 'palette tool-panel padded', tabIndex: -1, =>
+    @div class: 'palette tool-panel padded native-key-bindings', tabIndex: -1, =>
       @div class: 'palette-controls', =>
         @div class: 'inline-block btn-group', =>
           @button outlet: 'gridSwitch', class: 'btn', 'Grid'
