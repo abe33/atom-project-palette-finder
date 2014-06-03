@@ -9,6 +9,7 @@
     "atom": ">0.50.0"
   },
   "dependencies": {
+    "property-accessors": "1.x",
     "underscore-plus": "1.x",
     "emissary": "1.x",
     "mixto": "1.x",
