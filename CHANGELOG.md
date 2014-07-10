@@ -1,3 +1,11 @@
+<a name="v0.6.0"></a>
+# v0.6.0 (2014-07-10)
+
+## :sparkles: Features
+
+- Implement lazy access to a PaletteItem color ([01793aff](https://github.com/abe33/atom-project-palette-finder/commit/01793aff11558653d7fda5d81789e5c1089694a3))
+  <br>It reduces the risk of error when a palette item is defined before another item it references.
+
 <a name="v0.5.2"></a>
 # v0.5.2 (2014-05-28)
 
