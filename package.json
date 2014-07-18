@@ -14,7 +14,7 @@
     "emissary": "1.x",
     "mixto": "1.x",
     "prolix": "1.x",
-    "pigments": ">= 1.8.0",
+    "pigments": ">= 1.10.0",
     "pathwatcher": "1.x"
   },
   "devDependencies": {
