@@ -108,7 +108,7 @@ class ProjectPaletteFinder
             .sort (a,b) ->
               b.length - a.length
 
-            paletteRegexp = '(' + items.join('|') + ')(?!-|\\s*[\\.:=])\\b'
+            paletteRegexp = '(' + items.join('|') + ')(?!-|[ \\t]*[\\.:=])\\b'
             Color.removeExpression('palette')
 
             Color.addExpression 'palette', paletteRegexp, (color, expr) =>
