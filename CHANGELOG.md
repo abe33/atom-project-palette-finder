@@ -1,3 +1,10 @@
+<a name="v0.6.2"></a>
+# v0.6.2 (2014-07-30)
+
+## :bug: Bug Fixes
+
+- Fix missing match for color followed by a class selector ([cc92621a](https://github.com/abe33/atom-project-palette-finder/commit/cc92621a7aa9d0c718676593d734e5c606fc12d0))
+
 <a name="v0.6.0"></a>
 # v0.6.0 (2014-07-10)
 
