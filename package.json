@@ -14,8 +14,8 @@
     "emissary": "1.x",
     "mixto": "1.x",
     "prolix": "1.x",
-    "pigments": "~1.11.3",
-    "pathwatcher": "1.x"
+    "pigments": "2.x",
+    "pathwatcher": "2.x"
   },
   "devDependencies": {
     "wrench": "1.5.x",
