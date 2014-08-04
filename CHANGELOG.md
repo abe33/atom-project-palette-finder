@@ -1,3 +1,10 @@
+<a name="v1.0.0"></a>
+# v1.0.0 (2014-08-04)
+
+## :sparkles: Features
+
+- Add support for pigments 2.0.0 and Atom 0.120.0 ([c53df1b5](https://github.com/abe33/atom-project-palette-finder/commit/c53df1b5ec39d6d518cc57f3e9fa651e7b33a289))
+
 <a name="v0.6.2"></a>
 # v0.6.2 (2014-07-30)
 
