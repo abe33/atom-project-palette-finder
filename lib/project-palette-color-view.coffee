@@ -29,3 +29,6 @@ class ProjectPaletteColorView extends View
     @colorPath.on 'click', ->
       atom.workspaceView.open(paletteItem.filePath, split: 'left').then (editor) ->
         editor.setSelectedBufferRange(paletteItem.getRange(), autoscroll: true)
+
+
+  getModel: -> {}
