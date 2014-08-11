@@ -9,7 +9,7 @@ class ProjectPaletteColorView extends View
       @div class: 'color-details', =>
         @span outlet: 'colorName', class: 'color-name'
         @span outlet: 'colorPath', class: 'color-path'
-      @div outlet: 'colorLine', class: 'color-line editor editor-colors', =>
+      @div outlet: 'colorLine', class: 'color-line editor editor-colors', tabIndex: -1, =>
 
   constructor: (paletteItem) ->
     super
