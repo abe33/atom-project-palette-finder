@@ -1,3 +1,11 @@
+<a name="v0.6.3"></a>
+# v0.6.3 (2014-08-11)
+
+## :bug: Bug Fixes
+
+- Fix inability to select the color declaration ([e6d771e9](https://github.com/abe33/atom-project-palette-finder/commit/e6d771e9a57602091eea3ceddc85a0b811f9935f), [#5](https://github.com/abe33/atom-project-palette-finder/issues/5))
+- Fix missing getModel method raising exception with autosave ([c14dc2e8](https://github.com/abe33/atom-project-palette-finder/commit/c14dc2e8ff14dbc53bc60d39ebbfd4b475537d14))
+
 <a name="v0.6.2"></a>
 # v0.6.2 (2014-07-30)
 
