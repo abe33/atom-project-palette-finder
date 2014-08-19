@@ -62,7 +62,7 @@ class ProjectPaletteFinder
 
       pane = atom.workspace.paneContainer.paneForUri uri
 
-      pane ||= atom.workspaceView.getActivePane().model
+      pane ||= atom.workspaceView.getActivePaneView().model
 
       atom.workspace.openUriInPane(uri, pane, {}).done (view) ->
         if view instanceof ProjectPaletteView
