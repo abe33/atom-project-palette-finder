@@ -1,3 +1,10 @@
+<a name="1.0.2"></a>
+# 1.0.2 (2014-08-19)
+
+## :bug: Bug Fixes
+
+- Fix deprecated method call ([c616ab83](https://github.com/abe33/atom-project-palette-finder/commit/c616ab83df274550be2d4377c2c514983e20206c), [#7](https://github.com/abe33/atom-project-palette-finder/issues/7))
+
 <a name="v1.0.0"></a>
 # v1.0.0 (2014-08-04)
 
