@@ -1,3 +1,10 @@
+<a name="v1.0.4"></a>
+# v1.0.4 (2014-09-18)
+
+## :bug: Bug Fixes
+
+- Fix broken palette view due to removed API ([05cc5e49](https://github.com/abe33/atom-project-palette-finder/commit/05cc5e49d60a34ea59a0d204fc9ef461e442061c), [#10](https://github.com/abe33/atom-project-palette-finder/issues/10))
+
 <a name="1.0.2"></a>
 # 1.0.2 (2014-08-19)
 
