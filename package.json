@@ -15,7 +15,8 @@
     "mixto": "1.x",
     "prolix": "1.x",
     "pigments": ">= 2.1.0",
-    "pathwatcher": "2.x"
+    "pathwatcher": "2.x",
+    "highlights": "0.14.x"
   },
   "devDependencies": {
     "wrench": "1.5.x",
