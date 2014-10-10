@@ -1,0 +1,9 @@
+body {
+  background: white;
+  color: black;
+}
+
+a {
+  color: blue;
+  border-bottom: 1px solid green;
+}

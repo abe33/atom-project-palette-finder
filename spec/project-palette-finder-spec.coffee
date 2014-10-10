@@ -36,3 +36,18 @@ describe "ProjectPaletteFinder", ->
       expect(palette.items.length).toEqual(12)
 
       expect(Color.colorExpressions.palette).toBeDefined()
+
+  describe 'palette:find-all-colors command', ->
+    it 'scans the project to find every colors', ->
+      readyCallback = jasmine.createSpy('readyCallback')
+      ProjectPaletteFinder.on 'palette:search-ready', readyCallback
+
+      atom.workspaceView.trigger('palette:find-all-colors')
+
+      waitsFor -> readyCallback.callCount is 1
+
+      runs ->
+        palette = readyCallback.argsForCall[0][0]
+        expect(palette).toBeDefined()
+
+        expect(palette.items.length).toEqual(17)

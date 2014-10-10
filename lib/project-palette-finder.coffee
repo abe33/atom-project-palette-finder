@@ -6,9 +6,7 @@ Color = require 'pigments'
 querystring = require 'querystring'
 {Emitter} = require 'emissary'
 
-Palette = require './palette'
-PaletteItem = require './palette-item'
-ProjectPaletteView = require './project-palette-view'
+[Palette, PaletteItem, ProjectPaletteView, ProjectColorsFindView] = []
 
 class ProjectPaletteFinder
   @Color: Color
@@ -41,13 +39,23 @@ class ProjectPaletteFinder
 
     atom.workspaceView.command 'palette:refresh', => @scanProject()
     atom.workspaceView.command 'palette:view', => @displayView()
+    atom.workspaceView.command 'palette:find-all-colors', => @findAllColors()
 
     atom.workspace.addOpener (uriToOpen) ->
-      {protocol, host, pathname} = url.parse uriToOpen
-      pathname = querystring.unescape(pathname) if pathname
+      ProjectPaletteView ||= require './project-palette-view'
 
-      return unless protocol is 'palette:'
+      {protocol, host} = url.parse uriToOpen
+      return unless protocol is 'palette:' and host is 'view'
+
       new ProjectPaletteView
+
+    atom.workspace.addOpener (uriToOpen) ->
+      ProjectColorsResultsView ||= require './project-colors-results-view'
+
+      {protocol, host} = url.parse uriToOpen
+      return unless protocol is 'palette:' and host is 'search'
+
+      new ProjectColorsResultsView
 
   deactivate: ->
 
@@ -69,6 +77,9 @@ class ProjectPaletteFinder
           view.setPalette palette
 
   scanProject: ->
+    Palette ||= require './palette'
+    PaletteItem ||= require './palette-item'
+
     @palette = new Palette
 
     filePatterns = @constructor.filePatterns
@@ -116,6 +127,9 @@ class ProjectPaletteFinder
 
       @emit 'palette:ready', @palette
       @palette
+
+  findAllColors: ->
+    @palette
 
   getPatternsRegExp: ->
     new RegExp '(' + @constructor.patterns.join('|') + ')', 'gi'
