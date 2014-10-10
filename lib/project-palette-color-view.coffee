@@ -1,5 +1,5 @@
 path = require 'path'
-{View, EditorView} = require 'atom'
+{View} = require 'atom'
 
 module.exports =
 class ProjectPaletteColorView extends View

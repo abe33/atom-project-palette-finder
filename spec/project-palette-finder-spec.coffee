@@ -11,12 +11,12 @@ waitsForPromise = (fn) -> window.waitsForPromise timeout: 30000, fn
 describe "ProjectPaletteFinder", ->
 
   beforeEach ->
-    atom.project.setPath(path.join(__dirname, 'fixtures'))
+    atom.project.setPaths([path.join(__dirname, 'fixtures')])
 
     tempPath = fs.realpathSync(temp.mkdirSync('atom'))
-    fixturesPath = atom.project.getPath()
+    fixturesPath = atom.project.getPaths()[0]
     wrench.copyDirSyncRecursive(fixturesPath, tempPath, forceDelete: true)
-    atom.project.setPath(tempPath)
+    atom.project.setPaths([tempPath])
 
     atom.workspaceView = new WorkspaceView
 

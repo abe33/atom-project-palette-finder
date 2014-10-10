@@ -42,7 +42,7 @@ class ProjectPaletteFinder
     atom.workspaceView.command 'palette:refresh', => @scanProject()
     atom.workspaceView.command 'palette:view', => @displayView()
 
-    atom.workspace.registerOpener (uriToOpen) ->
+    atom.workspace.addOpener (uriToOpen) ->
       {protocol, host, pathname} = url.parse uriToOpen
       pathname = querystring.unescape(pathname) if pathname
 
