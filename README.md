@@ -17,7 +17,7 @@ Theses colors are then stored in a `Palette` object that is exposed by the packa
 
 ### autocomplete-plus Binding
 
-If the [autocomplete-plus] package is installed, this package will automatically register a provider to preview and complete colors name as you type:
+If the [autocomplete-plus](https://atom.io/packages/autocomplete-plus) package is installed, this package will automatically register a provider to preview and complete colors name as you type:
 
 ![Palette View](https://raw.github.com/abe33/atom-project-palette-finder/master/autocomplete.gif)
 
