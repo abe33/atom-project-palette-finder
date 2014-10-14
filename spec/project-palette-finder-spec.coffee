@@ -50,4 +50,4 @@ describe "ProjectPaletteFinder", ->
         palette = readyCallback.argsForCall[0][0]
         expect(palette).toBeDefined()
 
-        expect(palette.items.length).toEqual(17)
+        expect(palette.items.length).toEqual(22)

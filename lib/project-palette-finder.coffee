@@ -6,7 +6,7 @@ Color = require 'pigments'
 querystring = require 'querystring'
 {Emitter} = require 'emissary'
 
-[Palette, PaletteItem, ProjectPaletteView, ProjectColorsResultsView] = []
+[Palette, PaletteItem, ProjectPaletteView, ProjectColorsResultsView, ProjectColorsResultView] = []
 
 class ProjectPaletteFinder
   @Color: Color
@@ -23,9 +23,11 @@ class ProjectPaletteFinder
     '**/*.scss'
     '**/*.less'
     '**/*.styl'
+    '**/*.css'
   ]
 
   @grammarForExtensions:
+    css: 'sass'
     sass: 'sass'
     scss: 'scss'
     less: 'less'
@@ -129,7 +131,70 @@ class ProjectPaletteFinder
       @palette
 
   findAllColors: ->
-    @palette
+    Palette ||= require './palette'
+    PaletteItem ||= require './palette-item'
+
+    palette = new Palette
+
+    filePatterns = @constructor.filePatterns.concat()
+
+    results = []
+    pendingResults = []
+
+    re = new RegExp(Color.colorRegExp(), 'g')
+
+    uri = "palette://search"
+
+    pane = atom.workspace.paneContainer.paneForUri uri
+    pane ||= atom.workspaceView.getActivePaneView().model
+
+    view = null
+
+    atom.workspace.openUriInPane(uri, pane, {}).done (v) ->
+      view = v if v instanceof ProjectColorsResultsView
+
+    promise = atom.project.scan re, paths: filePatterns, (m) =>
+      for result in m.matches
+        result.color = new Color(result.matchText)
+        result.range[0][1] += result.matchText.indexOf(result.color.colorExpression)
+
+      if view?
+        if pendingResults.length > 0
+          pendingResults.push m
+          @createSearchResultForFile(r,view) for r in pendingResults
+          pendingResults = []
+        else
+          @createSearchResultForFile(m,view)
+
+      else
+        pendingResults.push m
+
+      results.push m
+
+    promise.then =>
+      for {filePath, matches} in results
+        for {lineText, matchText, range} in matches
+          ext = filePath.split('.')[-1..][0]
+          palette.addItem new PaletteItem {
+            filePath
+            row: range[0][0]
+            lineText
+            language: @constructor.grammarForExtensions[ext]
+            extension: ext
+            name: matchText
+            lineRange: range
+            colorString: matchText
+          }
+
+      @emit 'palette:search-ready', palette
+      palette
+
+  createSearchResultForFile: (m, parentView) ->
+    ProjectColorsResultView ||= require './project-colors-result-view'
+
+    {filePath, matches} = m
+
+    parentView.appendResult new ProjectColorsResultView(filePath, matches)
 
   getPatternsRegExp: ->
     new RegExp '(' + @constructor.patterns.join('|') + ')', 'gi'
