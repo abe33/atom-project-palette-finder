@@ -21,7 +21,7 @@ class MatchView extends View
       @span range.start.row + 1, class: 'line-number text-subtle'
       @span class: 'preview', outlet: 'preview', =>
         @span prefix
-        @span match.matchText, class: 'match', style: "background: #{match.color.toCSS()}; color: #{textColor};", outlet: 'matchText'
+        @span match.matchText, class: 'match color-match', style: "background: #{match.color.toCSS()}; color: #{textColor};", outlet: 'matchText'
         @span suffix
 
   initialize: ({@filePath, @match}) ->
