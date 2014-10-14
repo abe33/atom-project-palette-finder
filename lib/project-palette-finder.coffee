@@ -6,7 +6,7 @@ Color = require 'pigments'
 querystring = require 'querystring'
 {Emitter} = require 'emissary'
 
-[Palette, PaletteItem, ProjectPaletteView, ProjectColorsFindView] = []
+[Palette, PaletteItem, ProjectPaletteView, ProjectColorsResultsView] = []
 
 class ProjectPaletteFinder
   @Color: Color
