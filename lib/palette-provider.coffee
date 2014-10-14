@@ -16,9 +16,14 @@ module.exports = ({Provider, Suggestion}) ->
       palette = @module.palette
       allNames = palette.items.map (i) -> i.name
       matchedNames = fuzzaldrin.filter allNames, prefix
-            
+
       palette.items.forEach (item) =>
         return unless item.name in matchedNames
-        suggestions.push new Suggestion(this, word: item.name, label: "<span class='color-suggestion-preview' style='background: #{item.color.toCSS()}'></span>", renderLabelAsHtml: true)
+        suggestions.push new Suggestion(this, {
+          word: item.name
+          label: "<span class='color-suggestion-preview' style='background: #{item.color.toCSS()}'></span>"
+          renderLabelAsHtml: true
+          prefix
+        })
 
       suggestions
