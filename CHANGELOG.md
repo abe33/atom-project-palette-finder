@@ -1,3 +1,16 @@
+<a name="v2.0.0"></a>
+# v2.0.0 (2014-10-14)
+
+## :sparkles: Features
+
+- Add a project-wide color search view like find-and-replace ([46d119b6](https://github.com/abe33/atom-project-palette-finder/commit/46d119b6ec62385634753bc73292cdcac995bc02))
+
+## :bug: Bug Fixes
+
+- Fix bad class name in declaration ([899d0b4b](https://github.com/abe33/atom-project-palette-finder/commit/899d0b4bf883a806b426ed1e5a7f37cb472a2e44))
+- Fix left margin of code sample in palette view ([ea9409cb](https://github.com/abe33/atom-project-palette-finder/commit/ea9409cb56cea88fc2e1fa0fc1898d34d12a30f9))
+- Fix deprecations ([fb65bbfb](https://github.com/abe33/atom-project-palette-finder/commit/fb65bbfba4e970b91d8aba82d4fda086a3cf448e))
+
 <a name="v1.0.4"></a>
 # v1.0.4 (2014-09-18)
 
