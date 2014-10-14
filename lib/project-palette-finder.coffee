@@ -33,6 +33,9 @@ class ProjectPaletteFinder
     less: 'less'
     styl: 'stylus'
 
+  providers: []
+  autocomplete: null
+
   constructor: ->
     @Color = Color
 
@@ -59,7 +62,28 @@ class ProjectPaletteFinder
 
       new ProjectColorsResultsView
 
+    pkg = atom.packages.getLoadedPackage("autocomplete-plus")
+    if pkg?
+      @autocomplete = pkg.mainModule
+      @registerProviders()
+
+  registerProviders: ->
+    PaletteProvider = require('./palette-provider')(@autocomplete)
+    @editorSubscription = atom.workspaceView.eachEditorView (editorView) =>
+      provider = new PaletteProvider editorView, this
+
+      @autocomplete.registerProviderForEditorView provider, editorView
+
+      @providers.push provider
+
   deactivate: ->
+    @editorSubscription?.off()
+    @editorSubscription = null
+
+    @providers.forEach (provider) =>
+      @autocomplete.unregisterProvider provider
+
+    @providers = []
 
   serialize: ->
     {
