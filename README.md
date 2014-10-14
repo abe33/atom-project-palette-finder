@@ -2,19 +2,18 @@
 
 [![Build Status](https://travis-ci.org/abe33/atom-project-palette-finder.svg)](https://travis-ci.org/abe33/atom-project-palette-finder)
 
-Finds and exposes colors defined in a project's Less, Sass or Stylus files.
+Finds and exposes colors defined in a project's CSS, Less, Sass or Stylus files.
 
-![Palette View](https://raw.github.com/abe33/atom-project-palette-finder/master/screenshot.gif)
-
-In itself this packages only offer the to following commands:
+This package provides the following commands:
 
  * `palette:refresh` - Scans the project directory for Less, Sass (scss & sass) and Stylus files and search for variables containing colors. It do so at startup and everytime you trigger the `palette:refresh` command.
  * `palette:view` - Scans the project and display a view in the active pane that lists all the colors defined in the palette, with source and path to the definition.
+    <br> ![Palette View](https://raw.github.com/abe33/atom-project-palette-finder/master/screenshot.gif)
  * `palette:find-all-colors` - Scans the project for all colors in CSS, Less, Sass and Stylus files.
     <br>![Palette Search](https://raw.github.com/abe33/atom-project-palette-finder/master/search.gif)
 
-Theses colors are then stored in a `Palette` object that is exposed by the package.
-After a project scan the colors can be retrieved with their name (the name of variable that hold them).
+In that context the project's *palette* contains all the variables in the project that contains a color. And not all the color references in the project.
+Theses colors are then stored in a `Palette` object that is exposed by the package and can be used in several context (autocompletion, colors preview). After a project scan the colors can be retrieved with their name (the name of variable that hold them).
 
 ### autocomplete-plus Binding
 
