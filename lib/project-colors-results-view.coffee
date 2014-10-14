@@ -16,9 +16,17 @@ class ProjectColorsResultsView extends ScrollView
 
   initialize: ->
     super
+    @files = 0
+    @colors = 0
+
     @loadingMessage.hide()
 
   getTitle: -> 'Project Colors Search'
   getURI: -> 'palette://search'
 
-  appendResult: (res) -> @resultsList.append(res)
+  appendResult: (res) ->
+    @files++
+    @colors += res.results.length
+
+    @resultsList.append(res)
+    @previewCount.html("#{@colors} colors found in #{@files} files")

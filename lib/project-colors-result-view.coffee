@@ -18,12 +18,14 @@ class ProjectColorsResultView extends View
         @span outlet: 'description', class: 'path-match-number'
       @ul outlet: 'matches', class: 'matches list-tree'
 
-  initialize: (filePath, results) ->
+  initialize: (@filePath, @results) ->
     @isExpanded = true
-    @renderResults(filePath, results)
+    @renderResults(@filePath, @results)
     @pathDetails.on 'click', => @expand(not @isExpanded)
 
   renderResults: (filePath, results) ->
+    @description.show().text("(#{results?.length})")
+
     for match in results
       @matches.append new MatchView({filePath, match})
 
