@@ -28,6 +28,8 @@ class MatchView extends View
     if fontFamily = atom.config.get('editor.fontFamily')
       @preview.css('font-family', fontFamily)
 
+    @on 'mousedown', => @confirm()    
+
   confirm: ->
     atom.workspaceView.open(@filePath, split: 'left').then (editor) =>
       editor.setSelectedBufferRange(@match.range, autoscroll: true)
