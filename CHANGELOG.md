@@ -1,3 +1,10 @@
+<a name="v2.1.1"></a>
+# v2.1.1 (2014-10-15)
+
+## :bug: Bug Fixes
+
+- Fix unused pathwatcher dependency ([667cf0a1](https://github.com/abe33/atom-project-palette-finder/commit/667cf0a1aed24b4ce7b8b156f77b18f9873d840b))
+
 <a name="v2.1.0"></a>
 # v2.1.0 (2014-10-15)
 
