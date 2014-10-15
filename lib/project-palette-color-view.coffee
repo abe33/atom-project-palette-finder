@@ -21,14 +21,14 @@ class ProjectPaletteColorView extends View
 
     grammar = atom.syntax.selectGrammar("hello.#{paletteItem.extension}", paletteItem.lineText)
 
-    Highlights = require 'highlights'
-    highlighter = new Highlights(includePath: grammar.path)
-    html = highlighter.highlightSync
-      fileContents: paletteItem.lineText
-      scopeName: grammar.scopeName
+    # Highlights = require 'highlights'
+    # highlighter = new Highlights(includePath: grammar.path)
+    # html = highlighter.highlightSync
+    #   fileContents: paletteItem.lineText
+    #   scopeName: grammar.scopeName
 
     @colorLine.empty()
-    @colorLine.append(html)
+    @colorLine.append(paletteItem.lineText)
 
     @colorPath.on 'click', ->
       atom.workspaceView.open(paletteItem.filePath, split: 'left').then (editor) ->
