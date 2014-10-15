@@ -1,3 +1,15 @@
+<a name="v2.1.0"></a>
+# v2.1.0 (2014-10-15)
+
+## :sparkles: Features
+
+- Add an autocomplete provider for palette colors ([54dbdbf7](https://github.com/abe33/atom-project-palette-finder/commit/54dbdbf75d1ab907422646eb76387f150450cb8f))
+
+## :bug: Bug Fixes
+
+- Fix broken insertion of selected color ([29977978](https://github.com/abe33/atom-project-palette-finder/commit/299779787fe23a87bf84e2344f27f1fad8a0865d))
+
+
 <a name="v2.0.1"></a>
 # v2.0.1 (2014-10-14)
 
