@@ -1,3 +1,10 @@
+<a name="v2.1.2"></a>
+# v2.1.2 (2014-10-15)
+
+## :bug: Bug Fixes
+
+- Fix pigments issue with variable names ([d3729235](https://github.com/abe33/atom-project-palette-finder/commit/d37292359f7600d14289c9370139730eacd9bdc4))
+
 <a name="v2.1.1"></a>
 # v2.1.1 (2014-10-15)
 
