@@ -29,4 +29,23 @@ class ProjectColorsResultsView extends ScrollView
     @colors += res.results.length
 
     @resultsList.append(res)
-    @previewCount.html("#{@colors} colors found in #{@files} files")
+    @previewCount.html(@getCountMessage())
+
+  searchComplete: ->
+    @previewCount.html(@getCountMessage())
+
+    if @colors is 0
+      @addClass 'no-results'
+      @resultsList.after """
+      <ul class='centered background-message no-results-overlay'>
+        <li>No Results</li>
+      </ul>
+      """
+
+  getCountMessage: ->
+    filesString = if @files is 1 then 'file' else 'files'
+
+    if @colors > 0
+      "<span class='text-info'>#{@colors} colors</span> found in <span class='text-info'>#{@files} #{filesString}</span>"
+    else
+      "No colors found in #{@files} #{filesString}"
