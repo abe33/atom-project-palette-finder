@@ -1,3 +1,14 @@
+<a name="v2.2.0"></a>
+# v2.2.0 (2014-10-16)
+
+## :sparkles: Features
+
+- Implement scope filtering for autocompletion provider ([f29f97e4](https://github.com/abe33/atom-project-palette-finder/commit/f29f97e4fb47a880a92907e0aff3b633df37aebd), [#13](https://github.com/abe33/atom-project-palette-finder/issues/13))
+
+## :bug: Bug Fixes
+
+- Fix empty view when search returns nothing ([099a9b19](https://github.com/abe33/atom-project-palette-finder/commit/099a9b19f8c034e83109beb342e14824a76fe866), [#12](https://github.com/abe33/atom-project-palette-finder/issues/12))
+
 <a name="v2.1.2"></a>
 # v2.1.2 (2014-10-15)
 
