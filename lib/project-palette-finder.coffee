@@ -36,6 +36,20 @@ class ProjectPaletteFinder
   providers: []
   autocomplete: null
 
+  config:
+    autocompleteScopes:
+      type: 'array'
+      default: [
+        'source.css'
+        'source.css.less'
+        'source.sass'
+        'source.css.scss'
+        'source.stylus'
+      ]
+      description: 'The palette provider will only complete color names in editors whose scope is present in this list.'
+      items:
+        type: 'string'
+
   constructor: ->
     @Color = Color
 

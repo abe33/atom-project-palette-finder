@@ -7,6 +7,7 @@ module.exports = ({Provider, Suggestion}) ->
 
     wordRegex: /(@|\$)*\b\w*[a-zA-Z_]\w*\b/g
     buildSuggestions: ->
+      return unless @editor.getGrammar().scopeName in atom.config.get('project-palette-finder.autocompleteScopes')
       selection = @editor.getSelection()
       prefix = @prefixOfSelection selection
       return unless prefix.length
