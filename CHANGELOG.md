@@ -1,3 +1,10 @@
+<a name="v2.2.1"></a>
+# v2.2.1 (2014-10-22)
+
+## :bug: Bug Fixes
+
+- Fix broken providers registration in latest Atom ([25a0648f](https://github.com/abe33/atom-project-palette-finder/commit/25a0648f04fa0e36fd8b90d69649ff27a136660d))
+
 <a name="v2.2.0"></a>
 # v2.2.0 (2014-10-16)
 
