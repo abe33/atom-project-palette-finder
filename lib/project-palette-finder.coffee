@@ -82,13 +82,14 @@ class ProjectPaletteFinder
       @registerProviders()
 
   registerProviders: ->
-    PaletteProvider = require('./palette-provider')(@autocomplete)
-    @editorSubscription = atom.workspaceView.eachEditorView (editorView) =>
-      provider = new PaletteProvider editorView, this
+    requestAnimationFrame =>
+      PaletteProvider = require('./palette-provider')(@autocomplete)
+      @editorSubscription = atom.workspaceView.eachEditorView (editorView) =>
+        provider = new PaletteProvider editorView, this
 
-      @autocomplete.registerProviderForEditorView provider, editorView
+        @autocomplete.registerProviderForEditorView provider, editorView
 
-      @providers.push provider
+        @providers.push provider
 
   deactivate: ->
     @editorSubscription?.off()
