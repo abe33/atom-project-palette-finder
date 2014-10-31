@@ -24,6 +24,7 @@ module.exports = ({Provider, Suggestion}) ->
           word: item.name
           label: "<span class='color-suggestion-preview' style='background: #{item.color.toCSS()}'></span>"
           renderLabelAsHtml: true
+          className: 'color-suggestion'
           prefix
         })
 
