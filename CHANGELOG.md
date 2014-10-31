@@ -1,3 +1,10 @@
+<a name="v2.2.2"></a>
+# v2.2.2 (2014-10-31)
+
+## :bug: Bug Fixes
+
+- Fix opacity of color suggestions preview ([932da65e](https://github.com/abe33/atom-project-palette-finder/commit/932da65ed3fe5942604c22f5787478fe69024b28))
+
 <a name="v2.2.1"></a>
 # v2.2.1 (2014-10-22)
 
