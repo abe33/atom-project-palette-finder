@@ -1,3 +1,10 @@
+<a name="v2.3.2"></a>
+# v2.3.2 (2014-11-26)
+
+## :bug: Bug Fixes
+
+- Fix Color class is not the same instance in PaletteItem ([a158badb](https://github.com/abe33/atom-project-palette-finder/commit/a158badb9d3973cc494f1fb5d7f8db911d5ced31))
+
 <a name="v2.3.1"></a>
 # v2.3.1 (2014-11-26)
 
