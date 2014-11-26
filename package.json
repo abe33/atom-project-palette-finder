@@ -14,7 +14,7 @@
     "emissary": "1.x",
     "mixto": "1.x",
     "prolix": "1.x",
-    "pigments": ">= 3.0.3",
+    "pigments": ">= 3.0.4",
     "fs-plus": "2.x",
     "fuzzaldrin": "2.x"
   },
