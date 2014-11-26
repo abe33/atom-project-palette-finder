@@ -1,3 +1,10 @@
+<a name="v2.3.0"></a>
+# v2.3.0 (2014-11-26)
+
+## :sparkles: Features
+
+- Implement colors sort in the palette view ([79cece03](https://github.com/abe33/atom-project-palette-finder/commit/79cece033be2c235310c5ab5cc03648057369d0a))
+
 <a name="v2.2.2"></a>
 # v2.2.2 (2014-10-31)
 
