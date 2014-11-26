@@ -50,6 +50,15 @@ class ProjectPaletteFinder
       items:
         type: 'string'
 
+    paletteDisplay:
+      type: 'string'
+      default: 'list'
+      enum: ['list', 'grid']
+
+    paletteSort:
+      type: 'boolean'
+      default: false
+
   constructor: ->
     @Color = Color
 

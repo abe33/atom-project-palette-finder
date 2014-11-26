@@ -4,13 +4,30 @@ ProjectPaletteColorView = require './project-palette-color-view'
 module.exports =
 class CoffeeCompileView extends ScrollView
   @content: ->
+
+    gridClass = 'btn'
+    listClass = 'btn'
+
+    displayMode = atom.config.get('project-palette-finder.paletteDisplay')
+    if displayMode is 'list'
+      listClass += ' selected'
+    else
+      gridClass += ' selected'
+
     @div class: 'palette tool-panel padded native-key-bindings', tabIndex: -1, =>
       @div class: 'palette-controls', =>
         @div class: 'inline-block btn-group', =>
-          @button outlet: 'gridSwitch', class: 'btn', 'Grid'
-          @button outlet: 'listSwitch', class: 'btn selected', 'List'
+          @button outlet: 'gridSwitch', class: gridClass, 'Grid'
+          @button outlet: 'listSwitch', class: listClass, 'List'
         @div class: 'inline-block', =>
-          @input outlet: 'sortColors', type: 'checkbox', id: 'sort-colors'
+          inputAttrs =
+            outlet: 'sortColors'
+            type: 'checkbox'
+            id: 'sort-colors'
+
+          if atom.config.get('project-palette-finder.paletteSort')
+            inputAttrs['checked'] = 'checked'
+          @input inputAttrs
           @label for: 'sort-colors', 'Sort Colors'
         @div outlet: 'paletteStats', class: 'palette-stats inline-block'
 
@@ -20,18 +37,23 @@ class CoffeeCompileView extends ScrollView
     @subscribe this, 'core:move-up', => @scrollUp()
     @subscribe this, 'core:move-down', => @scrollDown()
 
+    @sorted = atom.config.get('project-palette-finder.paletteSort')
+
     @subscribe @gridSwitch, 'click', =>
+      atom.config.set('project-palette-finder.paletteDisplay', 'grid')
       @gridSwitch.addClass 'selected'
       @listSwitch.removeClass 'selected'
       @paletteColors.addClass 'grid'
 
     @subscribe @listSwitch, 'click', =>
+      atom.config.set('project-palette-finder.paletteDisplay', 'list')
       @gridSwitch.removeClass 'selected'
       @listSwitch.addClass 'selected'
       @paletteColors.removeClass 'grid'
 
     @subscribe @sortColors, 'change', =>
-      @sorted = @sortColors.val()
+      @sorted = @sortColors[0].checked
+      atom.config.set('project-palette-finder.paletteSort', @sorted)
       @buildColors()
 
   setPalette: (@palette) ->
@@ -76,10 +98,14 @@ class CoffeeCompileView extends ScrollView
   buildColors: ->
     @paletteColors.html('')
 
-    items = @palette.items
+    items = @palette.items.concat()
+
+    console.log @palette.items
 
     if @sorted
-      items = items.sort (a,b) => @compareColors(a,b)
+      items.sort (a,b) => @compareColors(a,b)
+
+    console.log items
 
     for item in items
       view = new ProjectPaletteColorView item
