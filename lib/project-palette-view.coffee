@@ -78,10 +78,8 @@ class CoffeeCompileView extends ScrollView
 
     items = @palette.items
 
-    console.log items
     if @sorted
       items = items.sort (a,b) => @compareColors(a,b)
-    console.log items
 
     for item in items
       view = new ProjectPaletteColorView item
