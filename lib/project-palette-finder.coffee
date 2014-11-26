@@ -128,7 +128,7 @@ class ProjectPaletteFinder
 
   scanProject: ->
     Palette ||= require './palette'
-    PaletteItem ||= require './palette-item'
+    PaletteItem ||= require('./palette-item')(Color)
 
     @palette = new Palette
 
