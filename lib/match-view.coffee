@@ -1,4 +1,5 @@
-{View, Range} = require 'atom'
+{Range} = require 'atom'
+{View} = require 'atom-space-pen-views'
 
 LeadingWhitespace = /^\s+/
 removeLeadingWhitespace = (string) -> string.replace(LeadingWhitespace, '')
@@ -28,7 +29,7 @@ class MatchView extends View
     if fontFamily = atom.config.get('editor.fontFamily')
       @preview.css('font-family', fontFamily)
 
-    @on 'mousedown', => @confirm()    
+    @on 'mousedown', => @confirm()
 
   confirm: ->
     atom.workspaceView.open(@filePath, split: 'left').then (editor) =>

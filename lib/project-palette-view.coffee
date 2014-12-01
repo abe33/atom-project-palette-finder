@@ -1,4 +1,4 @@
-{ScrollView} = require 'atom'
+{ScrollView} = require 'atom-space-pen-views'
 ProjectPaletteColorView = require './project-palette-color-view'
 
 module.exports =

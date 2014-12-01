@@ -1,4 +1,4 @@
-{ScrollView} = require 'atom'
+{ScrollView} = require 'atom-space-pen-views'
 
 module.exports =
 class ProjectColorsResultsView extends ScrollView
