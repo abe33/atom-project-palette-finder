@@ -88,14 +88,15 @@ class ProjectPaletteFinder
 
       new ProjectColorsResultsView
 
-    pkg = atom.packages.getLoadedPackage("autocomplete-plus")
-    if pkg?
-      @autocomplete = pkg.mainModule
-      @registerProviders()
     atom.workspace.observeTextEditors (textEditor) =>
       subscriptions = new CompositeDisposable
       subscriptions.add textEditor.onDidSave => @scanProject()
       subscriptions.add textEditor.onDidDestroy -> subscriptions.dispose()
+
+    unless atom.inSpecMode()
+      try atom.packages.activatePackage("autocomplete-plus").then (pkg) =>
+        @autocomplete = pkg.mainModule
+        @registerProviders()
 
   onDidUpdatePalette: (callback) ->
     @emitter.on 'did-update-palette', callback
