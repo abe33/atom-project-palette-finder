@@ -2,15 +2,14 @@ _ = require 'underscore-plus'
 fs = require 'fs'
 url = require 'url'
 path = require 'path'
-Color = require 'pigments'
+
 querystring = require 'querystring'
 EmitterMixin = require('emissary').Emitter
 {Emitter, CompositeDisposable} = require 'event-kit'
 
-[Palette, PaletteItem, ProjectPaletteView, ProjectColorsResultsView, ProjectColorsResultView] = []
+[Palette, PaletteItem, ProjectPaletteView, ProjectColorsResultsView, ProjectColorsResultView, Color, deprecate] = []
 
 class ProjectPaletteFinder
-  @Color: Color
   EmitterMixin.includeInto(this)
 
   @patterns: [
@@ -61,7 +60,7 @@ class ProjectPaletteFinder
       default: false
 
   constructor: ->
-    @Color = Color
+    @Color = Color = require 'pigments'
     @emitter = new Emitter
 
   activate: ({palette}) ->
