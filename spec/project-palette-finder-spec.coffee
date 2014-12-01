@@ -4,11 +4,11 @@ temp = require 'temp'
 wrench = require 'wrench'
 Color = require 'pigments'
 ProjectPaletteFinder = require '../lib/project-palette-finder'
-{WorkspaceView} = require 'atom'
 
 waitsForPromise = (fn) -> window.waitsForPromise timeout: 30000, fn
 
 describe "ProjectPaletteFinder", ->
+  [workspaceElement] = []
 
   beforeEach ->
     atom.project.setPaths([path.join(__dirname, 'fixtures')])
@@ -18,7 +18,8 @@ describe "ProjectPaletteFinder", ->
     wrench.copyDirSyncRecursive(fixturesPath, tempPath, forceDelete: true)
     atom.project.setPaths([tempPath])
 
-    atom.workspaceView = new WorkspaceView
+    workspaceElement = atom.views.getView(atom.workspace)
+    jasmine.attachToDOM(workspaceElement)
 
     waitsForPromise ->
       atom.packages.activatePackage('project-palette-finder')
@@ -42,7 +43,7 @@ describe "ProjectPaletteFinder", ->
       readyCallback = jasmine.createSpy('readyCallback')
       ProjectPaletteFinder.on 'palette:search-ready', readyCallback
 
-      atom.workspaceView.trigger('palette:find-all-colors')
+      atom.commands.dispatch(workspaceElement, 'palette:find-all-colors')
 
       waitsFor -> readyCallback.callCount is 1
 
