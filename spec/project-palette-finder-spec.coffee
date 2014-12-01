@@ -18,9 +18,6 @@ describe "ProjectPaletteFinder", ->
     wrench.copyDirSyncRecursive(fixturesPath, tempPath, forceDelete: true)
     atom.project.setPaths([tempPath])
 
-    workspaceElement = atom.views.getView(atom.workspace)
-    jasmine.attachToDOM(workspaceElement)
-
     waitsForPromise ->
       atom.packages.activatePackage('project-palette-finder')
 
@@ -37,6 +34,29 @@ describe "ProjectPaletteFinder", ->
       expect(palette.items.length).toEqual(12)
 
       expect(Color.colorExpressions.palette).toBeDefined()
+
+  describe 'when an editor is opened', ->
+    [editor] = []
+    describe 'with a supported file', ->
+      beforeEach ->
+        waitsFor ->
+          atom.workspace.open('palette.less')
+
+        runs ->
+          workspaceElement = atom.views.getView(atom.workspace)
+          jasmine.attachToDOM(workspaceElement)
+
+          atom.workspace.getActivePane().activateNextItem()
+
+        waitsFor ->
+          editor = atom.workspace.getActiveEditor()
+
+      it 'refreshes the palette on save', ->
+        spyOn(ProjectPaletteFinder, 'scanProject')
+
+        editor.getBuffer().emitter.emit('did-save')
+
+        expect(ProjectPaletteFinder.scanProject).toHaveBeenCalled()
 
   describe 'palette:find-all-colors command', ->
     it 'scans the project to find every colors', ->

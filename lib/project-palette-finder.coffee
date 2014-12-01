@@ -92,6 +92,11 @@ class ProjectPaletteFinder
     if pkg?
       @autocomplete = pkg.mainModule
       @registerProviders()
+    atom.workspace.observeTextEditors (textEditor) =>
+      subscriptions = new CompositeDisposable
+      subscriptions.add textEditor.onDidSave => @scanProject()
+      subscriptions.add textEditor.onDidDestroy -> subscriptions.dispose()
+
   onDidUpdatePalette: (callback) ->
     @emitter.on 'did-update-palette', callback
 
