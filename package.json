@@ -12,6 +12,8 @@
     "property-accessors": "1.x",
     "underscore-plus": "1.x",
     "emissary": "1.x",
+    "event-kit": "^0",
+    "grim": "^0",
     "mixto": "1.x",
     "prolix": "1.x",
     "pigments": ">= 3.0.4",

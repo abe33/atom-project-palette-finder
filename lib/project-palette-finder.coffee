@@ -4,13 +4,14 @@ url = require 'url'
 path = require 'path'
 Color = require 'pigments'
 querystring = require 'querystring'
-{Emitter} = require 'emissary'
+EmitterMixin = require('emissary').Emitter
+{Emitter, CompositeDisposable} = require 'event-kit'
 
 [Palette, PaletteItem, ProjectPaletteView, ProjectColorsResultsView, ProjectColorsResultView] = []
 
 class ProjectPaletteFinder
   @Color: Color
-  Emitter.includeInto(this)
+  EmitterMixin.includeInto(this)
 
   @patterns: [
     '\\$[a-zA-Z0-9-_]+\\s*:'
@@ -61,6 +62,7 @@ class ProjectPaletteFinder
 
   constructor: ->
     @Color = Color
+    @emitter = new Emitter
 
   activate: ({palette}) ->
     @scanProject()
@@ -91,6 +93,21 @@ class ProjectPaletteFinder
     if pkg?
       @autocomplete = pkg.mainModule
       @registerProviders()
+  onDidUpdatePalette: (callback) ->
+    @emitter.on 'did-update-palette', callback
+
+  onDidFindColors: (callback) ->
+    @emitter.on 'did-find-colors', callback
+
+  on: (event, callback) ->
+    deprecate ?= require('grim').deprecate
+    switch event
+      when 'palette:ready'
+        deprecate('Use ProjectPaletteFinder::onDidUpdatePalette instead')
+      when 'palette:search-ready'
+        deprecate('Use ProjectPaletteFinder::onDidFindColors instead')
+
+    EmitterMixin::on.call(this, event, callback)
 
   registerProviders: ->
     requestAnimationFrame =>
@@ -178,6 +195,7 @@ class ProjectPaletteFinder
               color.rgba = @palette.getItemByName(expr).color.rgba
 
       @emit 'palette:ready', @palette
+      @emitter.emit 'did-update-palette', @palette
       @palette
 
   findAllColors: ->
@@ -238,6 +256,7 @@ class ProjectPaletteFinder
 
       view.searchComplete()
       @emit 'palette:search-ready', palette
+      @emitter.emit 'did-find-colors', palette
       palette
 
   createSearchResultForFile: (m, parentView) ->

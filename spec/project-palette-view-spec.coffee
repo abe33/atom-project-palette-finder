@@ -29,7 +29,7 @@ describe 'ProjectPaletteView', ->
     it 'should have created a pane with the palette ui', ->
       paletteView = null
 
-      ProjectPaletteFinder.on 'palette:ready', ->
+      ProjectPaletteFinder.onDidUpdatePalette ->
         paletteView = workspaceElement.querySelector('.palette')
         expect(paletteView).toBeDefined()
         expect(paletteView.querySelectorAll('.color').length).toEqual(12)

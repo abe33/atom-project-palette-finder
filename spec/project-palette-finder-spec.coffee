@@ -26,7 +26,7 @@ describe "ProjectPaletteFinder", ->
 
   it 'scans the project on activation', ->
     readyCallback = jasmine.createSpy('readyCallback')
-    ProjectPaletteFinder.on 'palette:ready', readyCallback
+    ProjectPaletteFinder.onDidUpdatePalette readyCallback
 
     waitsFor -> readyCallback.callCount is 1
 
@@ -41,7 +41,7 @@ describe "ProjectPaletteFinder", ->
   describe 'palette:find-all-colors command', ->
     it 'scans the project to find every colors', ->
       readyCallback = jasmine.createSpy('readyCallback')
-      ProjectPaletteFinder.on 'palette:search-ready', readyCallback
+      ProjectPaletteFinder.onDidFindColors readyCallback
 
       atom.commands.dispatch(workspaceElement, 'palette:find-all-colors')
 
