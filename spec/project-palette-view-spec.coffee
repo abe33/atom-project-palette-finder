@@ -25,21 +25,13 @@ describe 'ProjectPaletteView', ->
     waitsForPromise ->
       atom.packages.activatePackage('project-palette-finder')
 
-    runs ->
-      readyCallback = jasmine.createSpy('readyCallback')
-      ProjectPaletteFinder.on 'palette:ready', readyCallback
-
-    waitsFor -> readyCallback.callCount is 1
-
   describe 'when palette:view command is triggered', ->
     it 'should have created a pane with the palette ui', ->
       paletteView = null
-      runs ->
-        atom.commands.dispatch workspaceElement, "palette:view"
 
-      waitsFor ->
+      ProjectPaletteFinder.on 'palette:ready', ->
         paletteView = workspaceElement.querySelector('.palette')
-        paletteView?
-
-      runs ->
+        expect(paletteView).toBeDefined()
         expect(paletteView.querySelectorAll('.color').length).toEqual(12)
+
+      atom.commands.dispatch(workspaceElement, "palette:view")

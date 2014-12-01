@@ -65,10 +65,11 @@ class ProjectPaletteFinder
   activate: ({palette}) ->
     @scanProject()
 
-    atom.commands.add 'atom-workspace',
-      'palette:refresh', => @scanProject()
-      'palette:view', => @displayView()
-      'palette:find-all-colors', => @findAllColors()
+    atom.commands.add 'atom-workspace', {
+      'palette:refresh': => @scanProject()
+      'palette:view': => @displayView()
+      'palette:find-all-colors': => @findAllColors()
+    }
 
     atom.workspace.addOpener (uriToOpen) ->
       ProjectPaletteView ||= require './project-palette-view'
@@ -194,8 +195,8 @@ class ProjectPaletteFinder
 
     uri = "palette://search"
 
-    pane = atom.workspace.paneContainer.paneForUri uri
-    pane ||= atom.workspaceView.getActivePaneView().model
+    pane = atom.workspace.paneForUri(uri)
+    pane ||= atom.workspace.getActivePane()
 
     view = null
 
