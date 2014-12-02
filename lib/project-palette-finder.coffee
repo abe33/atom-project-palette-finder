@@ -50,6 +50,18 @@ class ProjectPaletteFinder
       items:
         type: 'string'
 
+    saveWatchersScopes:
+      type: 'array'
+      default: [
+        'source.css.less'
+        'source.sass'
+        'source.css.scss'
+        'source.stylus'
+      ]
+      description: 'When a buffer matching one of this scope is saved the palette is reloaded'
+      items:
+        type: 'string'
+
     paletteDisplay:
       type: 'string'
       default: 'list'
@@ -62,6 +74,7 @@ class ProjectPaletteFinder
   constructor: ->
     @Color = Color = require 'pigments'
     @emitter = new Emitter
+    @subscriptions = new CompositeDisposable
 
   activate: ({palette}) ->
     @scanProject()
@@ -88,10 +101,7 @@ class ProjectPaletteFinder
 
       new ProjectColorsResultsView
 
-    atom.workspace.observeTextEditors (textEditor) =>
-      subscriptions = new CompositeDisposable
-      subscriptions.add textEditor.onDidSave => @scanProject()
-      subscriptions.add textEditor.onDidDestroy -> subscriptions.dispose()
+    @initializeWatchers()
 
     unless atom.inSpecMode()
       try atom.packages.activatePackage("autocomplete-plus").then (pkg) =>
@@ -114,6 +124,16 @@ class ProjectPaletteFinder
 
     EmitterMixin::on.call(this, event, callback)
 
+  initializeWatchers: ->
+    @subscriptions.add atom.config.observe 'project-palette-finder.saveWatchersScopes', (@saveWatchersScopes) =>
+
+    @subscriptions.add atom.workspace.observeTextEditors (textEditor) =>
+      subscriptions = new CompositeDisposable
+      subscriptions.add textEditor.onDidDestroy -> subscriptions.dispose()
+      subscriptions.add textEditor.onDidSave =>
+        return unless textEditor.getGrammar().scopeName in @saveWatchersScopes
+        @scanProject()
+
   registerProviders: ->
     requestAnimationFrame =>
       PaletteProvider = require('./palette-provider')(@autocomplete)
@@ -125,6 +145,7 @@ class ProjectPaletteFinder
         @providers.push provider
 
   deactivate: ->
+    @subscriptions.dispose()
     @editorSubscription?.off()
     @editorSubscription = null
 

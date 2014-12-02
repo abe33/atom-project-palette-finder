@@ -18,6 +18,10 @@ describe "ProjectPaletteFinder", ->
     wrench.copyDirSyncRecursive(fixturesPath, tempPath, forceDelete: true)
     atom.project.setPaths([tempPath])
 
+    atom.config.set('project-palette-finder.saveWatchersScopes', [
+      'text.plain.null-grammar'
+    ])
+
     waitsForPromise ->
       atom.packages.activatePackage('project-palette-finder')
 
@@ -57,6 +61,29 @@ describe "ProjectPaletteFinder", ->
         editor.getBuffer().emitter.emit('did-save')
 
         expect(ProjectPaletteFinder.scanProject).toHaveBeenCalled()
+
+    describe 'with a unsupported file', ->
+      beforeEach ->
+        waitsFor ->
+          atom.config.set('project-palette-finder.saveWatchersScopes', [])
+          atom.workspace.open('sample.coffee')
+
+        runs ->
+          workspaceElement = atom.views.getView(atom.workspace)
+          jasmine.attachToDOM(workspaceElement)
+
+          atom.workspace.getActivePane().activateNextItem()
+
+        waitsFor ->
+          editor = atom.workspace.getActiveEditor()
+
+      it 'does not refresh the palette on save', ->
+        spyOn(ProjectPaletteFinder, 'scanProject')
+
+        editor.getBuffer().emitter.emit('did-save')
+
+        expect(ProjectPaletteFinder.scanProject).not.toHaveBeenCalled()
+
 
   describe 'palette:find-all-colors command', ->
     it 'scans the project to find every colors', ->
