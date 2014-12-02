@@ -9,6 +9,10 @@
 
 - Fix tooltip creation since deprecation of setTooltip ([e6195931](https://github.com/abe33/atom-project-palette-finder/commit/e61959319dded28f3ad3b577f9d0efcdfc19b07e))
 
+## :racehorse: Performances
+
+- Speed up startup by delaying requires ([a7858e1e](https://github.com/abe33/atom-project-palette-finder/commit/a7858e1ec0f6a0837ccc02175a7f5e100532a0eb))
+
 <a name="v2.3.2"></a>
 # v2.3.2 (2014-11-26)
 
