@@ -15,7 +15,7 @@ class ProjectPaletteColorView extends View
     super
 
     @colorPreview.css backgroundColor: paletteItem.color.toCSS()
-    @colorPreview.setTooltip(paletteItem.name)
+    # @colorPreview.setTooltip(paletteItem.name)
     @colorName.text paletteItem.name
     @colorPath.text path.relative(atom.project.getPath(), paletteItem.filePath) + ':' + (paletteItem.row + 1)
 
