@@ -1,3 +1,14 @@
+<a name="v2.4.0"></a>
+# v2.4.0 (2014-12-02)
+
+## :sparkles: Features
+
+- Add a scopes array in config to manage watched files ([f0588291](https://github.com/abe33/atom-project-palette-finder/commit/f05882918364ab202ad17053c7c90f1cd6a2d568), [#15](https://github.com/abe33/atom-project-palette-finder/issues/15))
+
+## :bug: Bug Fixes
+
+- Fix tooltip creation since deprecation of setTooltip ([e6195931](https://github.com/abe33/atom-project-palette-finder/commit/e61959319dded28f3ad3b577f9d0efcdfc19b07e))
+
 <a name="v2.3.2"></a>
 # v2.3.2 (2014-11-26)
 
