@@ -1,13 +1,9 @@
-_ = require 'underscore-plus'
-fs = require 'fs'
-url = require 'url'
 path = require 'path'
 
-querystring = require 'querystring'
 EmitterMixin = require('emissary').Emitter
 {Emitter, CompositeDisposable} = require 'event-kit'
 
-[Palette, PaletteItem, ProjectPaletteView, ProjectColorsResultsView, ProjectColorsResultView, Color, deprecate] = []
+[Palette, PaletteItem, ProjectPaletteView, ProjectColorsResultsView, ProjectColorsResultView, Color, deprecate, url, _] = []
 
 class ProjectPaletteFinder
   EmitterMixin.includeInto(this)
@@ -86,6 +82,7 @@ class ProjectPaletteFinder
     }
 
     atom.workspace.addOpener (uriToOpen) ->
+      url ||= require 'url'
       ProjectPaletteView ||= require './project-palette-view'
 
       {protocol, host} = url.parse uriToOpen
@@ -94,6 +91,7 @@ class ProjectPaletteFinder
       new ProjectPaletteView
 
     atom.workspace.addOpener (uriToOpen) ->
+      url ||= require 'url'
       ProjectColorsResultsView ||= require './project-colors-results-view'
 
       {protocol, host} = url.parse uriToOpen
@@ -172,6 +170,7 @@ class ProjectPaletteFinder
       console.log reason
 
   scanProject: ->
+    _ ||= require 'underscore-plus'
     Palette ||= require './palette'
     PaletteItem ||= require('./palette-item')(Color)
 
