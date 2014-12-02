@@ -1,5 +1,6 @@
 {ScrollView} = require 'atom-space-pen-views'
 ProjectPaletteColorView = require './project-palette-color-view'
+{CompositeDisposable} = require 'event-kit'
 
 module.exports =
 class CoffeeCompileView extends ScrollView
@@ -34,24 +35,27 @@ class CoffeeCompileView extends ScrollView
       @div outlet: 'paletteColors', class: 'colors'
 
   initialize: ->
-    @subscribe this, 'core:move-up', => @scrollUp()
-    @subscribe this, 'core:move-down', => @scrollDown()
+    @subscriptions = new CompositeDisposable
+
+    @subscriptions.add atom.commands.add this,
+      'core:move-up': => @scrollUp()
+      'core:move-down': => @scrollDown()
 
     @sorted = atom.config.get('project-palette-finder.paletteSort')
 
-    @subscribe @gridSwitch, 'click', =>
+    @subscriptions.add @gridSwitch.on 'click', =>
       atom.config.set('project-palette-finder.paletteDisplay', 'grid')
       @gridSwitch.addClass 'selected'
       @listSwitch.removeClass 'selected'
       @paletteColors.addClass 'grid'
 
-    @subscribe @listSwitch, 'click', =>
+    @subscriptions.add @listSwitch.on 'click', =>
       atom.config.set('project-palette-finder.paletteDisplay', 'list')
       @gridSwitch.removeClass 'selected'
       @listSwitch.addClass 'selected'
       @paletteColors.removeClass 'grid'
 
-    @subscribe @sortColors, 'change', =>
+    @subscriptions.add @sortColors.on 'change', =>
       @sorted = @sortColors[0].checked
       atom.config.set('project-palette-finder.paletteSort', @sorted)
       @buildColors()
@@ -100,12 +104,8 @@ class CoffeeCompileView extends ScrollView
 
     items = @palette.items.concat()
 
-    console.log @palette.items
-
     if @sorted
       items.sort (a,b) => @compareColors(a,b)
-
-    console.log items
 
     for item in items
       view = new ProjectPaletteColorView item
