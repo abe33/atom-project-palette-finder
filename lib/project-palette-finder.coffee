@@ -73,8 +73,6 @@ class ProjectPaletteFinder
     @subscriptions = new CompositeDisposable
 
   activate: ({palette}) ->
-    @scanProject()
-
     atom.commands.add 'atom-workspace', {
       'palette:refresh': => @scanProject()
       'palette:view': => @displayView()
@@ -105,6 +103,8 @@ class ProjectPaletteFinder
       try atom.packages.activatePackage("autocomplete-plus").then (pkg) =>
         @autocomplete = pkg.mainModule
         @registerProviders()
+
+    @scanProject()
 
   onDidUpdatePalette: (callback) ->
     @emitter.on 'did-update-palette', callback
