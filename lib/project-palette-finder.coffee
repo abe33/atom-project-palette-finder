@@ -149,8 +149,7 @@ class ProjectPaletteFinder
     @editorSubscription?.off()
     @editorSubscription = null
 
-    @providers.forEach (provider) =>
-      @autocomplete.unregisterProvider provider
+    @providers.forEach (provider) => @autocomplete.unregisterProvider provider
 
     @providers = []
 
@@ -169,6 +168,8 @@ class ProjectPaletteFinder
       atom.workspace.openUriInPane(uri, pane, {}).done (view) ->
         if view instanceof ProjectPaletteView
           view.setPalette palette
+    .fail (reason) ->
+      console.log reason
 
   scanProject: ->
     Palette ||= require './palette'
@@ -222,6 +223,9 @@ class ProjectPaletteFinder
       @emit 'palette:ready', @palette
       @emitter.emit 'did-update-palette', @palette
       @palette
+
+    .fail (reason) ->
+      console.log reason
 
   findAllColors: ->
     Palette ||= require './palette'
