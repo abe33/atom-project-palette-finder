@@ -1,3 +1,10 @@
+<a name="v2.4.1"></a>
+# v2.4.1 (2014-12-03)
+
+## :bug: Bug Fixes
+
+- Remove dead code in a view
+
 <a name="v2.4.0"></a>
 # v2.4.0 (2014-12-02)
 
