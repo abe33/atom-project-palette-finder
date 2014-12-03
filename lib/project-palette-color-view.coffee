@@ -1,5 +1,9 @@
-path = require 'path'
 {View} = require 'atom-space-pen-views'
+path = require 'path'
+
+unless View?
+  console.warn "View can't be found! Something's wrong with the installation"
+  {View} = require 'atom'
 
 module.exports =
 class ProjectPaletteColorView extends View
