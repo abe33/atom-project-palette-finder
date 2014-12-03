@@ -1,5 +1,3 @@
-path = require 'path'
-
 EmitterMixin = require('emissary').Emitter
 {Emitter, CompositeDisposable} = require 'event-kit'
 
