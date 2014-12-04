@@ -1,3 +1,10 @@
+<a name="v2.4.3"></a>
+# v2.4.3 (2014-12-04)
+
+## :bug: Bug Fixes
+
+- Better version declaration for atom-space-pen-views ([3acc2cab](https://github.com/abe33/atom-project-palette-finder/commit/3acc2cabc075535806aef40079af5405e4a1a035))
+
 <a name="v2.4.1"></a>
 # v2.4.1 (2014-12-03)
 
