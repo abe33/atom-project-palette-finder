@@ -1,3 +1,10 @@
+<a name="v2.4.4"></a>
+# v2.4.4 (2014-12-04)
+
+## :bug: Bug Fixes
+
+- Fix broken view when palette is sorted ([c02c6f9f](https://github.com/abe33/atom-project-palette-finder/commit/c02c6f9fe2b51e9d22ff30de50eb37cd22499b65), [#17](https://github.com/abe33/atom-project-palette-finder/issues/17))
+
 <a name="v2.4.3"></a>
 # v2.4.3 (2014-12-04)
 
