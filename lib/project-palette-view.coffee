@@ -82,8 +82,8 @@ class CoffeeCompileView extends ScrollView
   getURI: -> 'palette://view'
 
   compareColors: (a,b) ->
-    a = a._color
-    b = b._color
+    a = a.color
+    b = b.color
     if a.hue < b.hue
       -1
     else if a.hue > b.hue
