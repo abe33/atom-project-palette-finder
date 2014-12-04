@@ -19,7 +19,7 @@
     "pigments": ">= 3.0.4",
     "fs-plus": "2.x",
     "fuzzaldrin": "2.x",
-    "atom-space-pen-views": "^0"
+    "atom-space-pen-views": ">= 0.20.0"
   },
   "devDependencies": {
     "wrench": "1.5.x",
