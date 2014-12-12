@@ -1,3 +1,10 @@
+<a name="v2.4.5"></a>
+# v2.4.5 (2014-12-12)
+
+## :bug: Bug Fixes
+
+- Fix use of deprecated autocomplete-plus API ([490e42b5](https://github.com/abe33/atom-project-palette-finder/commit/490e42b52ba67ab21d2cb0fea1f6cd004faf1d2e))
+
 <a name="v2.4.4"></a>
 # v2.4.4 (2014-12-04)
 
