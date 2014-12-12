@@ -2,8 +2,8 @@ module.exports = ({Provider, Suggestion}) ->
   fuzzaldrin = require 'fuzzaldrin'
 
   class PaletteProvider extends Provider
-    constructor: (editorView, @module) ->
-      super(editorView)
+    constructor: (editor, @module) ->
+      super(editor)
 
     wordRegex: /(@|\$)*\b\w*[a-zA-Z_]\w*\b/g
     buildSuggestions: ->
