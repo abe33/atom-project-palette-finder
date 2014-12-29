@@ -1,3 +1,10 @@
+<a name="v2.4.7"></a>
+# v2.4.7 (2014-12-29)
+
+## :bug: Bug Fixes
+
+- Fix view regexp breaking with windows paths ([1a4adae2](https://github.com/abe33/atom-project-palette-finder/commit/1a4adae228b659c45c1a4db4a556faf789672f99), [#20](https://github.com/abe33/atom-project-palette-finder/issues/20))
+
 <a name="v2.4.5"></a>
 # v2.4.5 (2014-12-12)
 
