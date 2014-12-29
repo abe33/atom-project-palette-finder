@@ -15,7 +15,7 @@ class ProjectColorsResultView extends View
         @span class: 'disclosure-arrow'
         @span class: iconClass + ' icon', 'data-name': fileBasename
         @span class: 'path-name bright', filePath.replace(///
-          (#{atom.project.getPaths().join('|')})#{path.sep}
+          (#{_.escapeRegExp atom.project.getPaths().join('|')})#{_.escapeRegExp path.sep}
         ///, '')
         @span outlet: 'description', class: 'path-match-number'
       @ul outlet: 'matches', class: 'matches list-tree'
