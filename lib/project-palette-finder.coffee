@@ -180,7 +180,7 @@ class ProjectPaletteFinder
     Palette ||= require './palette'
     PaletteItem ||= require('./palette-item')(Color)
 
-    @palette = new Palette
+    palette = new Palette
 
     filePatterns = @constructor.filePatterns
     results = []
@@ -202,7 +202,7 @@ class ProjectPaletteFinder
             row = range[0][0]
             ext = filePath.split('.')[-1..][0]
             language = @constructor.grammarForExtensions[ext]
-            @palette.addItem new PaletteItem {
+            palette.addItem new PaletteItem {
               filePath
               row
               lineText
@@ -213,7 +213,7 @@ class ProjectPaletteFinder
               colorString: res.match
             }
 
-            items = @palette.items
+            items = palette.items
             .map (item) ->
               _.escapeRegExp item.name
             .sort (a,b) ->
@@ -223,11 +223,14 @@ class ProjectPaletteFinder
             Color.removeExpression('palette')
 
             Color.addExpression 'palette', paletteRegexp, (color, expr) =>
-              color.rgba = @palette.getItemByName(expr).color.rgba
+              try
+                color.rgba = palette.getItemByName(expr).color.rgba
+              catch e
+                console.log color, expr, palette.getItemByName(expr), palette
 
-      @emit 'palette:ready', @palette
-      @emitter.emit 'did-update-palette', @palette
-      @palette
+      @emit 'palette:ready', palette
+      @emitter.emit 'did-update-palette', palette
+      @palette = palette
 
     .fail (reason) ->
       console.log reason
