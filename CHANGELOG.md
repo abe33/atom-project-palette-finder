@@ -1,3 +1,10 @@
+<a name="v2.4.9"></a>
+# v2.4.9 (2015-01-14)
+
+## :bug: Bug Fixes
+
+- Fix racing condition when the file is saved ([ee0d0f9c](https://github.com/abe33/atom-project-palette-finder/commit/ee0d0f9cc5fc279b5623f23f9b17e2036720da71))
+
 <a name="v2.4.8"></a>
 # v2.4.8 (2015-01-14)
 
