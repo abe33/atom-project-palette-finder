@@ -166,10 +166,10 @@ class ProjectPaletteFinder
     @scanProject().then (palette) ->
       uri = "palette://view"
 
-      pane = atom.workspace.paneForUri(uri)
+      pane = atom.workspace.paneForURI(uri)
       pane ||= atom.workspace.getActivePane()
 
-      atom.workspace.openUriInPane(uri, pane, {}).done (view) ->
+      atom.workspace.openURIInPane(uri, pane, {}).done (view) ->
         if view instanceof ProjectPaletteView
           view.setPalette palette
     .fail (reason) ->
@@ -185,7 +185,7 @@ class ProjectPaletteFinder
     filePatterns = @constructor.filePatterns
     results = []
 
-    promise = atom.project.scan @getPatternsRegExp(), paths: filePatterns, (m) ->
+    promise = atom.workspace.scan @getPatternsRegExp(), paths: filePatterns, (m) ->
       results.push m
 
     promise.then =>
@@ -247,15 +247,15 @@ class ProjectPaletteFinder
 
     uri = "palette://search"
 
-    pane = atom.workspace.paneForUri(uri)
+    pane = atom.workspace.paneForURI(uri)
     pane ||= atom.workspace.getActivePane()
 
     view = null
 
-    atom.workspace.openUriInPane(uri, pane, {}).done (v) ->
+    atom.workspace.openURIInPane(uri, pane, {}).then (v) ->
       view = v if v instanceof ProjectColorsResultsView
 
-    promise = atom.project.scan re, paths: filePatterns, (m) =>
+    promise = atom.workspace.scan re, paths: filePatterns, (m) =>
       for result in m.matches
         result.color = new Color(result.matchText)
         result.range[0][1] += result.matchText.indexOf(result.color.colorExpression)

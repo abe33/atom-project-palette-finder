@@ -53,7 +53,7 @@ describe "ProjectPaletteFinder", ->
           atom.workspace.getActivePane().activateNextItem()
 
         waitsFor ->
-          editor = atom.workspace.getActiveEditor()
+          editor = atom.workspace.getActiveTextEditor()
 
       it 'refreshes the palette on save', ->
         spyOn(ProjectPaletteFinder, 'scanProject')
@@ -75,7 +75,7 @@ describe "ProjectPaletteFinder", ->
           atom.workspace.getActivePane().activateNextItem()
 
         waitsFor ->
-          editor = atom.workspace.getActiveEditor()
+          editor = atom.workspace.getActiveTextEditor()
 
       it 'does not refresh the palette on save', ->
         spyOn(ProjectPaletteFinder, 'scanProject')
