@@ -1,3 +1,10 @@
+<a name="v2.4.8"></a>
+# v2.4.8 (2015-01-14)
+
+## :bug: Bug Fixes
+
+- Fix broken commands since change in pane's URI API ([61549b3b](https://github.com/abe33/atom-project-palette-finder/commit/61549b3bd3644064a7ac65a6b0ac031bca56e4d5))
+
 <a name="v2.4.7"></a>
 # v2.4.7 (2014-12-29)
 
