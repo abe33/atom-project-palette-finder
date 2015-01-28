@@ -15,7 +15,7 @@ module.exports = ({Provider, Suggestion}) ->
       suggestions = []
 
       palette = @module.palette
-      allNames = palette.items.map (i) -> i.name
+      allNames = if palette.items then palette.items.map (i) -> i.name else []
       matchedNames = fuzzaldrin.filter allNames, prefix
 
       palette.items.forEach (item) =>
