@@ -1,3 +1,11 @@
+<a name="2.4.10"></a>
+# 2.4.10 (2015-01-30)
+
+## :bug: Bug Fixes
+
+- Added a check for items existing ([2348f4c0](https://github.com/abe33/atom-project-palette-finder/commit/2348f4c02a1bd30b12df10aba207f5e5fde4c627))
+  <br>If items doesn't exist on palette then the map call fails. Returns empty array as a fallback.
+
 <a name="v2.4.9"></a>
 # v2.4.9 (2015-01-14)
 
