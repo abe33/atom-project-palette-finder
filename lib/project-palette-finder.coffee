@@ -34,11 +34,11 @@ class ProjectPaletteFinder
     autocompleteScopes:
       type: 'array'
       default: [
-        'source.css'
-        'source.css.less'
-        'source.sass'
-        'source.css.scss'
-        'source.stylus'
+        '.source.css'
+        '.source.css.less'
+        '.source.sass'
+        '.source.css.scss'
+        '.source.stylus'
       ]
       description: 'The palette provider will only complete color names in editors whose scope is present in this list.'
       items:
@@ -97,10 +97,7 @@ class ProjectPaletteFinder
 
     @initializeWatchers()
 
-    unless atom.inSpecMode()
-      try atom.packages.activatePackage("autocomplete-plus").then (pkg) =>
-        @autocomplete = pkg.mainModule
-        @registerProviders()
+    @registerProviders() unless atom.inSpecMode()
 
     @scanProject()
 
@@ -131,31 +128,38 @@ class ProjectPaletteFinder
         @scanProject()
 
   registerProviders: ->
-    requestAnimationFrame =>
-      PaletteProvider = require('./palette-provider')(@autocomplete)
+    fuzzaldrin = require 'fuzzaldrin'
+    provider =
+      id: 'project-palette-provider'
+      selector: atom.config.get('project-palette-finder.autocompleteScopes').join(',')
+      requestHandler: (options) =>
+        {editor, prefix} = options
 
-      if @autocomplete.registerProviderForEditor?
-        @editorSubscription = atom.workspace.observeTextEditors (editor) =>
-          provider = new PaletteProvider editor, this
-          @autocomplete.registerProviderForEditor provider, editor
+        return [] unless prefix.length
 
-          @providers.push provider
-      else
-        # It falls back to the old registration method.
-        @editorSubscription = atom.workspaceView.eachEditorView (editorView) =>
-          provider = new PaletteProvider editorView, this
-          @autocomplete.registerProviderForEditorView provider, editorView
+        suggestions = []
 
-          @providers.push provider
+        allNames = if @palette.items then @palette.items.map (i) -> i.name else []
+        matchedNames = fuzzaldrin.filter allNames, prefix
+
+        @palette.items.forEach (item) ->
+          return unless item.name in matchedNames
+          suggestions.push {
+            word: item.name
+            label: "<span class='color-suggestion-preview' style='background: #{item.color.toCSS()}'></span>"
+            renderLabelAsHtml: true
+            className: 'color-suggestion'
+            prefix
+          }
+
+        suggestions
+
+    @serviceRegistration = atom.services.provide('autocomplete.provider', '1.0.0', {provider})
 
   deactivate: ->
     @subscriptions.dispose()
-    @editorSubscription?.off()
-    @editorSubscription = null
-
-    @providers.forEach (provider) => @autocomplete.unregisterProvider provider
-
-    @providers = []
+    @serviceRegistration?.dispose()
+    @serviceRegistration = null
 
   serialize: ->
     {
