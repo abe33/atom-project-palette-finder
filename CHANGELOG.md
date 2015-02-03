@@ -1,3 +1,10 @@
+<a name="v2.4.12"></a>
+# v2.4.12 (2015-02-03)
+
+## :bug: Bug Fixes
+
+- Fix broken completion when palette isn't available yet ([6d9add21](https://github.com/abe33/atom-project-palette-finder/commit/6d9add217ad1fed0d4b03cebeab6b4dd955abf52), [#24](https://github.com/abe33/atom-project-palette-finder/issues/24))
+
 <a name="v2.4.11"></a>
 # v2.4.11 (2015-02-03)
 
