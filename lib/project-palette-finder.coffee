@@ -136,10 +136,11 @@ class ProjectPaletteFinder
         {editor, prefix} = options
 
         return [] unless prefix.length
+        return [] unless @palette
 
         suggestions = []
 
-        allNames = if @palette.items then @palette.items.map (i) -> i.name else []
+        allNames = @palette.items.map (i) -> i.name
         matchedNames = fuzzaldrin.filter allNames, prefix
 
         @palette.items.forEach (item) ->
