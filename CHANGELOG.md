@@ -1,5 +1,13 @@
-<a name="2.4.10"></a>
-# 2.4.10 (2015-01-30)
+<a name="v2.4.11"></a>
+# v2.4.11 (2015-02-03)
+
+## :bug: Bug Fixes
+
+- Fix autocomplete API deprecations ([53b1fbcf](https://github.com/abe33/atom-project-palette-finder/commit/53b1fbcfc2a647b005825cbb64929761122c8b07), [#28](https://github.com/abe33/atom-project-palette-finder/issues/28))
+- Includes new `pigments` version that fixes [#19](https://github.com/abe33/atom-project-palette-finder/issues/19) and [#23](https://github.com/abe33/atom-project-palette-finder/issues/23)
+
+<a name="v2.4.10"></a>
+# v2.4.10 (2015-01-30)
 
 ## :bug: Bug Fixes
 
