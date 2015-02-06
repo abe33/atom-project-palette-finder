@@ -202,7 +202,7 @@ class ProjectPaletteFinder
             spaceBefore = lineForMatch[matchText.length...res.range[0]]
             spaceEnd = lineForMatch[res.range[1]..-1]
             continue unless spaceBefore.match /^\s*$/
-            continue unless spaceEnd.match /^[\s;]*$/
+            continue unless spaceEnd.match /^[\s(!default)?;]*$/
 
             row = range[0][0]
             ext = filePath.split('.')[-1..][0]
