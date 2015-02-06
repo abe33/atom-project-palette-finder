@@ -1,3 +1,11 @@
+<a name="v2.4.13"></a>
+# v2.4.13 (2015-02-06)
+
+## :bug: Bug Fixes
+
+- Fix var with !default not found ([b7ee200b](https://github.com/abe33/atom-project-palette-finder/commit/b7ee200bc36bbcb1cf0a02b4127381be4cc46c33), [#23](https://github.com/abe33/atom-project-palette-finder/issues/23))
+
+
 <a name="v2.4.12"></a>
 # v2.4.12 (2015-02-03)
 
