@@ -1,10 +1,8 @@
-EmitterMixin = require('emissary').Emitter
 {Emitter, CompositeDisposable} = require 'event-kit'
 
 [Palette, PaletteItem, ProjectPaletteView, ProjectColorsResultsView, ProjectColorsResultView, Color, deprecate, url, _] = []
 
 class ProjectPaletteFinder
-  EmitterMixin.includeInto(this)
 
   @patterns: [
     '\\$[a-zA-Z0-9-_]+\\s*:'
@@ -106,16 +104,6 @@ class ProjectPaletteFinder
 
   onDidFindColors: (callback) ->
     @emitter.on 'did-find-colors', callback
-
-  on: (event, callback) ->
-    deprecate ?= require('grim').deprecate
-    switch event
-      when 'palette:ready'
-        deprecate('Use ProjectPaletteFinder::onDidUpdatePalette instead')
-      when 'palette:search-ready'
-        deprecate('Use ProjectPaletteFinder::onDidFindColors instead')
-
-    EmitterMixin::on.call(this, event, callback)
 
   initializeWatchers: ->
     @subscriptions.add atom.config.observe 'project-palette-finder.saveWatchersScopes', (@saveWatchersScopes) =>
@@ -233,9 +221,8 @@ class ProjectPaletteFinder
               catch e
                 console.log color, expr, palette.getItemByName(expr), palette
 
-      @emit 'palette:ready', palette
-      @emitter.emit 'did-update-palette', palette
       @palette = palette
+      @emitter.emit 'did-update-palette', palette
 
     .fail (reason) ->
       console.log reason
@@ -297,7 +284,6 @@ class ProjectPaletteFinder
           }
 
       view.searchComplete()
-      @emit 'palette:search-ready', palette
       @emitter.emit 'did-find-colors', palette
       palette
 
