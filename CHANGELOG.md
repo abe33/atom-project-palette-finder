@@ -1,3 +1,10 @@
+<a name="v2.4.15"></a>
+# v2.4.15 (2015-02-10)
+
+## :bug: Bug Fixes
+
+- Fix broken scan promise not returning the palette ([4671e0be](https://github.com/abe33/atom-project-palette-finder/commit/4671e0beda6d1714f55b2d744a8e422a65308126))
+
 <a name="v2.4.14"></a>
 # v2.4.14 (2015-02-10)
 
