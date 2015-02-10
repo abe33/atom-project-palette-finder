@@ -1,3 +1,10 @@
+<a name="v2.4.14"></a>
+# v2.4.14 (2015-02-10)
+
+## :arrow_up: Dependencies Update
+
+- Update pigments version to v3.2.0 ([af7520af](https://github.com/abe33/atom-project-palette-finder/commit/af7520af844dcfd7eb8835409e6464b7798bcdc6))
+
 <a name="v2.4.13"></a>
 # v2.4.13 (2015-02-06)
 
