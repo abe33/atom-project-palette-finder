@@ -223,6 +223,7 @@ class ProjectPaletteFinder
 
       @palette = palette
       @emitter.emit 'did-update-palette', palette
+      palette
 
     .fail (reason) ->
       console.log reason
