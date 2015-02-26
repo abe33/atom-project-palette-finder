@@ -143,12 +143,10 @@ class ProjectPaletteFinder
 
         suggestions
 
-    @serviceRegistration = atom.services.provide('autocomplete.provider', '1.0.0', {provider})
+    return {provider: provider}
 
   deactivate: ->
     @subscriptions.dispose()
-    @serviceRegistration?.dispose()
-    @serviceRegistration = null
 
   serialize: ->
     {
