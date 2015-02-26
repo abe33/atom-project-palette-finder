@@ -145,8 +145,6 @@ class ProjectPaletteFinder
 
   deactivate: ->
     @subscriptions.dispose()
-    @serviceRegistration?.dispose()
-    @serviceRegistration = null
 
   serialize: ->
     {
