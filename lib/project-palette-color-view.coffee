@@ -19,7 +19,7 @@ class ProjectPaletteColorView extends View
     @colorName.text paletteItem.name
     @colorPath.text path.relative(atom.project.getPath(), paletteItem.filePath) + ':' + (paletteItem.row + 1)
 
-    grammar = atom.syntax.selectGrammar("hello.#{paletteItem.extension}", paletteItem.lineText)
+    grammar = atom.grammars.selectGrammar("hello.#{paletteItem.extension}", paletteItem.lineText)
 
     @colorLine.empty()
     @colorLine.append(paletteItem.lineText)
