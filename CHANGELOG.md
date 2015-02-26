@@ -1,3 +1,12 @@
+<a name="v2.4.16"></a>
+# v2.4.16 (2015-02-26)
+
+## :bug: Bug Fixes
+
+- Fix stylus variable starting with $ not found ([555e5744](https://github.com/abe33/atom-project-palette-finder/commit/555e574451c7f0e7aeccb29ea167bfa0e66c74d1), [#31](https://github.com/abe33/atom-project-palette-finder/issues/31))
+- Fix atom.syntax deprecation ([e328c1fe](https://github.com/abe33/atom-project-palette-finder/commit/e328c1feea500ab5067c5070ed41bc949e3e7864))
+- Fix service hub deprecations ([a1dac4a0](https://github.com/abe33/atom-project-palette-finder/commita1dac4a0591073e6177f9828e6ea1b81359b05db), [#30](https://github.com/abe33/atom-project-palette-finder/issues/30))
+
 <a name="v2.4.15"></a>
 # v2.4.15 (2015-02-10)
 
