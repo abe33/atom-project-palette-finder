@@ -7,7 +7,7 @@ class ProjectPaletteFinder
   @patterns: [
     '\\$[a-zA-Z0-9-_]+\\s*:'
     '@[a-zA-Z0-9-_]+\\s*:'
-    '[a-zA-Z0-9-_]+\\s*='
+    '(\\$)?[a-zA-Z0-9-_]+\\s*='
   ]
 
   @filePatterns: [
