@@ -24,5 +24,12 @@
   "devDependencies": {
     "wrench": "1.5.x",
     "temp": "~0.6.0"
+  },
+  "providedServices": {
+    "autocomplete.provider": {
+      "versions": {
+        "1.1.0": "provideAutocompletion"
+      }
+    }
   }
 }

@@ -95,8 +95,6 @@ class ProjectPaletteFinder
 
     @initializeWatchers()
 
-    @registerProviders() unless atom.inSpecMode()
-
     @scanProject()
 
   onDidUpdatePalette: (callback) ->
@@ -115,7 +113,7 @@ class ProjectPaletteFinder
         return unless textEditor.getGrammar().scopeName in @saveWatchersScopes
         @scanProject()
 
-  registerProviders: ->
+  provideAutocompletion: ->
     fuzzaldrin = require 'fuzzaldrin'
     provider =
       id: 'project-palette-provider'
@@ -143,12 +141,10 @@ class ProjectPaletteFinder
 
         suggestions
 
-    @serviceRegistration = atom.services.provide('autocomplete.provider', '1.0.0', {provider})
+    {providers: [provider]}
 
   deactivate: ->
     @subscriptions.dispose()
-    @serviceRegistration?.dispose()
-    @serviceRegistration = null
 
   serialize: ->
     {
