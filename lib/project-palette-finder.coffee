@@ -69,6 +69,9 @@ class ProjectPaletteFinder
     @subscriptions = new CompositeDisposable
 
   activate: ({palette}) ->
+    if atom.packages.getLoadedPackage('pigments')?
+      return @deactivate()
+
     atom.commands.add 'atom-workspace', {
       'palette:refresh': => @scanProject()
       'palette:view': => @displayView()
@@ -94,7 +97,6 @@ class ProjectPaletteFinder
       new ProjectColorsResultsView
 
     @initializeWatchers()
-
     @scanProject()
 
   onDidUpdatePalette: (callback) ->
