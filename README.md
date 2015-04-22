@@ -1,3 +1,8 @@
+<div class='alert alert-danger'>
+This package is no longer maintained as it is now replaced by the [pigments package](https://atom.io/packages/pigments).
+<br/>If both packages are installed this package will not activate.
+</div>
+
 # project-palette-finder package
 
 [![Build Status](https://travis-ci.org/abe33/atom-project-palette-finder.svg)](https://travis-ci.org/abe33/atom-project-palette-finder)
